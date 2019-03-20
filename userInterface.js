@@ -35,6 +35,7 @@ function loadDirectory(folderPath) {
             }
 
             fileSystem.inspectAndDescribeFiles(folderPath, files, displayFiles);
+            search.flushToIndex();
         });
     };
 }

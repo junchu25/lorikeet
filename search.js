@@ -1,31 +1,42 @@
 'use strict'
 
 const lunr = require('lunr');
-let index;
+let idx;
+let idxItems;
 
 function resetIndex() {
-    index = lunr(function () {
-        this.field('file');
-        this.field('type');
-        this.ref('path');
-    });
+    idxItems = [];
+    idx = null;
 }
 
 function addToIndex(file) {
-    index.add(file);
+    idxItems.push(file);
+}
+
+function flushToIndex() {
+    idx = lunr(function () {
+        this.field('file');
+        this.field('type');
+        this.ref('path');
+
+        idxItems.forEach(value => {
+            this.add(value);
+        });
+    });
 }
 
 function find(query, cb) {
-    if (!index) {
+    if (!idx) {
         resetIndex();
     }
 
-    const results = index.search(query);
+    const results = idx.search(query);
     cb(results);
 }
 
 module.exports = {
     addToIndex,
     find,
-    resetIndex
+    resetIndex,
+    flushToIndex
 };
