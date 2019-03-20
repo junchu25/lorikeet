@@ -77,9 +77,37 @@ function bindSearchField(cb) {
     document.getElementById('search').addEventListener('keyup', cb, false);
 }
 
+function filterResults(results) {
+    const validFilePaths = results.map(result => {
+        return result.ref;
+    });
+    const items = document.getElementsByClassName('item');
+
+    for (let i = 0; i < items.length; ++i) {
+        let item = items[i];
+        let filePath = item.getElementsByTagName('img')[0].getAttribute('data-filepath');
+
+        if (validFilePaths.indexOf(filePath) !== -1) {
+            item.style = null;
+        } else {
+            item.style = 'display:none;';
+        }
+    }
+}
+
+function resetFilter() {
+    const items = document.getElementsByClassName('item');
+
+    for (let i = 0; i < items.length; ++i) {
+        items[i].style = null;
+    }
+}
+
 module.exports = {
     bindDocument,
     displayFiles,
     loadDirectory,
-    bindSearchField
+    bindSearchField,
+    filterResults,
+    resetFilter
 };
