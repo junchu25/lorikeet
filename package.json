@@ -2,13 +2,21 @@
     "name": "lorikeet",
     "version": "1.0.0",
     "main": "main.js",
+    "author": "Jun Chu <junchu25@outlook.com>",
+    "description": "文件浏览器",
     "scripts": {
-        "start": "electron ."
+        "start": "electron .",
+        "pack": "build",
+        "dist": "build"
     },
     "dependencies": {
         "async": "^2.6.2",
-        "electron": "^4.1.0",
         "lunr": "^2.3.6",
         "osenv": "^0.1.5"
+    },
+    "build": {},
+    "devDependencies": {
+        "electron": "^4.1.0",
+        "electron-builder": "^20.39.0"
     }
 }
