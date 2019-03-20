@@ -40,12 +40,24 @@ function inspectAndDescribeFile(filePath, cb) {
 function inspectAndDescribeFiles(folderPath, files, cb) {
     async.map(files, (file, asyncCb) => {
         let resolvedFilePath = path.resolve(folderPath, file);
+        console.log(resolvedFilePath);
         inspectAndDescribeFile(resolvedFilePath, asyncCb);
     }, cb);
+}
+
+let shell;
+
+if (process.versions.electron) {
+    shell = require('electron').shell;
+}
+
+function openFile(filePath) {
+    shell.openItem(filePath);
 }
 
 module.exports = {
     getUserHomeFolder,
     getFilesInFolder,
-    inspectAndDescribeFiles
+    inspectAndDescribeFiles,
+    openFile
 };

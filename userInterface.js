@@ -54,6 +54,10 @@ function displayFile(file) {
         clone.querySelector('img').addEventListener('dblclick', () => {
             loadDirectory(file.path)();
         }, false);
+    }else{
+        clone.querySelector('img').addEventListener('dblclick', () => {
+            fileSystem.openFile(file.path);
+        }, false);
     }
 
     clone.querySelector('.filename').innerText = file.file;
