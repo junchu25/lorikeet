@@ -11,7 +11,7 @@ function main() {
     userInterface.loadDirectory(folderPath)(window);
     userInterface.bindSearchField(event => {
         const query = event.target.value;
-
+        
         if (query === '') {
             userInterface.resetFilter();
         } else {

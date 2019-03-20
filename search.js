@@ -19,15 +19,17 @@ function flushToIndex() {
         this.field('type');
         this.ref('path');
 
+        const that = this;
+
         idxItems.forEach(value => {
-            this.add(value);
+            that.add(value);
         });
     });
 }
 
 function find(query, cb) {
     if (!idx) {
-        resetIndex();
+        flushToIndex();
     }
 
     const results = idx.search(query);
